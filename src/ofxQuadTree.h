@@ -100,16 +100,21 @@ public:
         }
     }
     
-    void addRectangleToVector(vector<SplitInfo> &rects) {
-        if(nodes != NULL) {
-            for(int i = 0; i < 4; i++) {
+    void addRectangleToVector(vector<SplitInfo> &rects)
+	{
+        if(nodes != NULL)
+		{
+            for(int i = 0; i < 4; i++) 
+			{
                 nodes[i]->addRectangleToVector(rects);
             }
-        } else {
-            rects.push_back((SplitInfo){
-                .rect =  ofRectangle(x, y, size, size),
-                .c = c
-            });
+        } 
+		else 
+		{
+			SplitInfo splitInfo;
+			splitInfo.rect = ofRectangle(x, y, size, size);
+			splitInfo.c = c;
+			rects.push_back(splitInfo);
         }
     }
     
