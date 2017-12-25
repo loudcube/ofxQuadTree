@@ -52,6 +52,34 @@ public:
         generateBase(img, depth, w, h, 0, 0, 2 << (depth - 1));
         calc();
     }
+
+	int getQuadNum() {
+		
+		int resultNum = 0;
+
+		if (nodes != NULL) {
+			for (int i = 0; i < 4; i++) {
+				nodes[i]->__accumQuadNum(resultNum);
+			}
+		}
+		else {
+			return 1;
+		}
+
+		return resultNum;
+	}
+
+	void __accumQuadNum( int& resultNum )
+	{
+		if (nodes != NULL) {
+			for (int i = 0; i < 4; i++) {
+				nodes[i]->__accumQuadNum(resultNum);
+			}
+		}
+		else {
+			++resultNum;
+		}
+	}
     
     inline void draw(unsigned char alpha = 255) {
         draw(0, 0, width, height, alpha);
@@ -60,6 +88,7 @@ public:
     inline void draw(int x, int y, unsigned char alpha = 255) {
         draw(x, y, width, height, alpha);
     }
+
     
     void draw(int x, int y, int width, int height, unsigned char alpha = 255) {
         float scaleX = width / (float)blockSize;
